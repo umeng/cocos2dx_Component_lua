@@ -86,6 +86,7 @@ function pushscene.create()
     menu:addChild(item7)
     menu:addChild(item8)
     menu:addChild(item9)
+    menu:addChild(item15)
     menu:setPosition(cc.p(0,0))
     scene:addChild(cc.Layer:create():addChild(menu))
 	return scene

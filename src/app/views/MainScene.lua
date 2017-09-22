@@ -3,6 +3,7 @@
 
 local MainScene = class("MainScene", cc.load("mvc").ViewBase)
 
+
 local function Game(sender)
     local a_scene = require "ana_scene"
     cc.Director:getInstance():pushScene(a_scene.create())
@@ -12,6 +13,11 @@ end
 local function push(sender)
     local p_scene = require "push_scene"
     cc.Director:getInstance():pushScene(p_scene.create())
+end
+
+local function social(sender)
+    local s_scene = require "social.social_scene"
+    cc.Director:getInstance():pushScene(s_scene.create())
 end
 
 function MainScene:onCreate()
@@ -25,6 +31,7 @@ function MainScene:onCreate()
     local  menu = cc.Menu:create()
     item7:registerScriptTapHandler(Game)
     item8:registerScriptTapHandler(push)
+    item9:registerScriptTapHandler(social)
     menu:addChild(item7)
     menu:addChild(item8)
     menu:addChild(item9)
