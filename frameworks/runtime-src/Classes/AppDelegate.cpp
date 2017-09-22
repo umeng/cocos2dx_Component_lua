@@ -4,6 +4,7 @@
 #include "scripting/lua-bindings/manual/lua_module_register.h"
 
 #include "lua_binding.h"
+#include "lua_push_binding.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -70,6 +71,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
     lua_register_mobclick_module(L);
+    lua_register_umpush_module(L);
     register_all_packages();
 
     LuaStack* stack = engine->getLuaStack();

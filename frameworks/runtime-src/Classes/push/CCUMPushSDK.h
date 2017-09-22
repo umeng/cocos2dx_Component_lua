@@ -29,12 +29,6 @@ namespace umeng {
 class CCUMPushSDK {
 
 public:
-
-	/**
-	 * 构建CCUMPushSDK对象
-	 * @param appKey 友盟app key
-	 */
-	static CCUMPushSDK* create();
     static void addTags(const char *tags,  PushRemainTagsCallBack callback);
     static void deleteTags(const char *tags,  PushRemainTagsCallBack callback);
     static void getTags(PushGetTagsCallBack callback);
@@ -42,9 +36,6 @@ public:
     static void setAlias(const char *name, const char *type, PushAliasCallBack callback);
     static void removeAlias(const char *name, const char *type, PushAliasCallBack callback);
 	
-
-
-
 };
 
 }

@@ -62,6 +62,7 @@
 		9D21BDED1F710D0C001FAE1E /* CCUMPushSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9D21BDEA1F710D0C001FAE1E /* CCUMPushSDK.mm */; };
 		9D21BDEE1F710D0C001FAE1E /* UMPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21BDEB1F710D0C001FAE1E /* UMPush.framework */; };
 		9D21BDF11F723FA6001FAE1E /* lua_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D21BDEF1F723FA6001FAE1E /* lua_binding.cpp */; };
+		9D3A0EA21F73918A00926392 /* lua_push_binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D3A0E9E1F73918900926392 /* lua_push_binding.cpp */; };
 		9FA3AE4E1BE9BCC900FC9645 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA3AE4D1BE9BCC900FC9645 /* CFNetwork.framework */; };
 		9FF504841A5E87B100AFDA55 /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FF504811A5E87B100AFDA55 /* ConsoleWindow.xib */; };
 		9FF504851A5E87B100AFDA55 /* ConsoleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF504831A5E87B100AFDA55 /* ConsoleWindowController.m */; };
@@ -250,6 +251,8 @@
 		9D21BDEB1F710D0C001FAE1E /* UMPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMPush.framework; path = ../Classes/push/UMPush.framework; sourceTree = "<group>"; };
 		9D21BDEF1F723FA6001FAE1E /* lua_binding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lua_binding.cpp; path = ../Classes/analytics/lua_binding.cpp; sourceTree = "<group>"; };
 		9D21BDF01F723FA6001FAE1E /* lua_binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_binding.h; path = ../Classes/analytics/lua_binding.h; sourceTree = "<group>"; };
+		9D3A0E9E1F73918900926392 /* lua_push_binding.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = lua_push_binding.cpp; path = ../Classes/push/lua_push_binding.cpp; sourceTree = "<group>"; };
+		9D3A0EA11F73918900926392 /* lua_push_binding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = lua_push_binding.h; path = ../Classes/push/lua_push_binding.h; sourceTree = "<group>"; };
 		9FA3AE4D1BE9BCC900FC9645 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		9FF504781A5E86D600AFDA55 /* libsimulator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libsimulator.xcodeproj; path = "../../cocos2d-x/tools/simulator/libsimulator/proj.ios_mac/libsimulator.xcodeproj"; sourceTree = "<group>"; };
 		9FF504811A5E87B100AFDA55 /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleWindow.xib; sourceTree = "<group>"; };
@@ -435,6 +438,8 @@
 			children = (
 				9D21BDE91F710D0C001FAE1E /* CCUMPushSDK.h */,
 				9D21BDEA1F710D0C001FAE1E /* CCUMPushSDK.mm */,
+				9D3A0E9E1F73918900926392 /* lua_push_binding.cpp */,
+				9D3A0EA11F73918900926392 /* lua_push_binding.h */,
 				9D21BDEB1F710D0C001FAE1E /* UMPush.framework */,
 			);
 			name = push;
@@ -769,6 +774,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D3A0EA21F73918A00926392 /* lua_push_binding.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				9D21BD591F710169001FAE1E /* MobClickCpp.mm in Sources */,

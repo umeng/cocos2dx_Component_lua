@@ -41,7 +41,7 @@ static string asserstring(NSString* str){
 
 namespace umeng {
     
-void CCUMPushSDK::addTags(const char *tags, PushRemainTagsCallBack callback){
+void CCUMPushSDK::addTags(const char *tags,PushRemainTagsCallBack callback){
     [UMessage addTags:getNSStringFromCString(tags) response:^(id  _Nonnull responseObject, NSInteger remain, NSError * _Nonnull error) {
         int code = -1;
         int remainnum = 0;
@@ -62,11 +62,10 @@ void CCUMPushSDK::addTags(const char *tags, PushRemainTagsCallBack callback){
             }
         }
         callback(code, remainnum);
-
     }];
 }
 
-void CCUMPushSDK::deleteTags(const char *tags, PushRemainTagsCallBack callback){
+void CCUMPushSDK::deleteTags(const char *tags,PushRemainTagsCallBack callback){
     [UMessage deleteTags:getNSStringFromCString(tags) response:^(id  _Nonnull responseObject, NSInteger remain, NSError * _Nonnull error) {
         int code = -1;
         int remainnum = 0;
@@ -116,7 +115,6 @@ void CCUMPushSDK::getTags(PushGetTagsCallBack callback){
 void CCUMPushSDK::addAlias(const char *name, const char *type, PushAliasCallBack callback){
     [UMessage addAlias:getNSStringFromCString(name) type:getNSStringFromCString(type) response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
         int code = -1;
-        int remainnum = 0;
         if (error) {
             code = error.code;
         }else{
@@ -132,7 +130,6 @@ void CCUMPushSDK::addAlias(const char *name, const char *type, PushAliasCallBack
         }
         callback(code);
     }];
-
 }
 
 void CCUMPushSDK::setAlias(const char *name, const char *type, PushAliasCallBack callback){
