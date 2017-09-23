@@ -10,7 +10,10 @@
             <option value="$PROJECT_DIR$/../../cocos2d-x/cocos/platform/android/libcocos2dx" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+<<<<<<< HEAD
             <option value="$PROJECT_DIR$/push" />
+=======
+>>>>>>> c1063a76d8b5e9a799e1f40fd0db59ff48ceaaa9
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

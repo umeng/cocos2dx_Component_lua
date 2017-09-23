@@ -5,7 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/app/cocos.iml" filepath="$PROJECT_DIR$/app/cocos.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../cocos2d-x/cocos/platform/android/libcocos2dx/libcocos2dx.iml" filepath="$PROJECT_DIR$/../../cocos2d-x/cocos/platform/android/libcocos2dx/libcocos2dx.iml" />
       <module fileurl="file://$PROJECT_DIR$/proj.android-studio.iml" filepath="$PROJECT_DIR$/proj.android-studio.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/push/push.iml" filepath="$PROJECT_DIR$/push/push.iml" />
+=======
+>>>>>>> c1063a76d8b5e9a799e1f40fd0db59ff48ceaaa9
     </modules>
   </component>
 </project>
