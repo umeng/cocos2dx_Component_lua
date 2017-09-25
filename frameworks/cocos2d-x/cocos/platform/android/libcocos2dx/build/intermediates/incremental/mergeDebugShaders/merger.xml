@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
+<merger version="3"><dataSet config="main"><source path="/Users/umeng/file/source/Cocos2dx_Component/frameworks/cocos2d-x/cocos/platform/android/libcocos2dx/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/umeng/file/source/Cocos2dx_Component/frameworks/cocos2d-x/cocos/platform/android/libcocos2dx/src/debug/shaders"/></dataSet></merger>
+=======
 <merger version="3"><dataSet config="main"><source path="/Users/zhz/Desktop/work/Cocos2dx_Component/frameworks/cocos2d-x/cocos/platform/android/libcocos2dx/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/zhz/Desktop/work/Cocos2dx_Component/frameworks/cocos2d-x/cocos/platform/android/libcocos2dx/src/debug/shaders"/></dataSet></merger>
+>>>>>>> c1063a76d8b5e9a799e1f40fd0db59ff48ceaaa9
