@@ -1,49 +1,79 @@
 cc.exports.authorizescene = {}
 
+
+local umShare = require "umSocialForLua"
 local lab_tag = 456
+
+function cc.exports.authCallback(platform, stCode, data)
+    local result = "";
+    print("platform is "..platform)
+    print("stCode is "..stCode)
+    for k,v in pairs(data) do
+        print("#### data "..k.."->"..v..".")
+    end
+
+    if (stCode == 200) then
+        print("#### 授权完成")
+        result = "授权完成"
+        for k,v in pairs(data) do
+            print("#### data "..k.."->"..v..".")
+        end
+
+    elseif (stCode == 0) then
+        result = "授权出错";
+        print("#### 授权出错");
+    elseif (stCode == -1) then
+        result = "取消授权";
+        print("#### 取消授权");
+    else 
+           print("#### 未知类型");
+    end
+    --item->setString(result.c_str());
+end
+
 local function back(sender)
     -- body
     cc.Director:getInstance():popScene()
 end
 local function qq_authorize(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.QQ_authorize("authCallback")
 end
 local function qq_del_authorize(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.QQ_del_authorize("authCallback")
 end
 local function sina_authorize(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.sina_authorize("authCallback")
 end
 local function sina_del_authorize(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.sina_del_authorize("authCallback")
 end
 local function wx_authorize(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.wx_authorize("authCallback")
 end
 local function wx_del_authorize(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.wx_del_authorize("authCallback")
 end
 local function facebook_authorize(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.facebook_authorize("authCallback")
 end
 local function facebook_del_authorize(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.facebook_del_authorize("authCallback")
 end
 local function twitter_authorize(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.twitter_authorize("authCallback")
 end
 local function twitter_del_authorize(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.twitter_del_authorize("authCallback")
 end
 
 function authorizescene.create()

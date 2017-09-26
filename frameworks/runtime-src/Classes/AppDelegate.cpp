@@ -5,7 +5,7 @@
 
 #include "lua_binding.h"
 #include "lua_push_binding.h"
-
+#include "lua_share_binding.h"
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
 
@@ -72,6 +72,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_module_register(L);
     lua_register_mobclick_module(L);
     lua_register_umpush_module(L);
+    lua_register_umshare_module(L);
     register_all_packages();
 
     LuaStack* stack = engine->getLuaStack();

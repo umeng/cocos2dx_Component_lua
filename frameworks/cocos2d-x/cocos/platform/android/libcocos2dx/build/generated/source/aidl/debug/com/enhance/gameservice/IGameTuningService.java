@@ -1,10 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
-<<<<<<< HEAD
- * Original file: /Users/umeng/file/source/Cocos2dx_Component/frameworks/cocos2d-x/cocos/platform/android/java/src/com/enhance/gameservice/IGameTuningService.aidl
-=======
  * Original file: /Users/zhz/Desktop/work/Cocos2dx_Component/frameworks/cocos2d-x/cocos/platform/android/java/src/com/enhance/gameservice/IGameTuningService.aidl
->>>>>>> c1063a76d8b5e9a799e1f40fd0db59ff48ceaaa9
  */
 package com.enhance.gameservice;
 public interface IGameTuningService extends android.os.IInterface

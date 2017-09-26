@@ -1,4 +1,34 @@
 cc.exports.socscene = {}
+local umShare = require "umSocialForLua"
+
+
+local function boardDismissCallback()
+    
+    print("share dismiss");
+    -- body
+end
+
+
+local function shareCallback(platform, stCode, errorMsg)
+    local result = "";
+   if (stCode == 200) {
+        result = "分享成功";
+        print("#### HelloWorld 分享成功 --> Cocos2d-x SDK ");
+    } else if (stCode == -1) {
+         result = "分享取消";
+        print("#### HelloWorld 分享取消 --> Cocos2d-x SDK ");
+    }
+        else {
+        result = "分享失败";
+        print("#### HelloWorld 分享出错 --> Cocos2d-x SDK ");
+    }
+    
+    result = result..errorMsg
+    print("#### callback!!!!!! "..result)
+  
+    print("platform num is : "..platform..","..stCode)
+    -- body
+end
 
 local lab_tag = 456
 local function back(sender)
@@ -7,26 +37,29 @@ local function back(sender)
 end
 local function qq_share(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.qq_share("Umeng Social Cocos2d-x SDK -->  qqshare   testing","title" ,"","res/closenormal","shareCallback")
 end
 local function sina_share(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.sina_share("Umeng Social Cocos2d-x SDK -->  sinashare   testing","title" ,"title" ,"https://wsq.umeng.com/","https://dev.umeng.com/images/tab2_1.png","shareCallback")
 end
 
 local function wx_share(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    umShare.wx_share("Umeng Social Cocos2d-x SDK -->  wxshare   testing","title" ,"title" ,"https://wsq.umeng.com/","https://dev.umeng.com/images/tab2_1.png","shareCallback")
 end
 
-local function facebook_share(sender)
+local function open_share(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    local platforms = {0,4,3,1,2,12,11}
+     umShare.open_share(platforms, "来自分享面板", "title" ,"https://dev.umeng.com/images/tab2_1.png","https://wsq.umeng.com/","boardDismissCallback","shareCallback")
+
 end
 
 local function twitter_share(sender)
     -- body
-    cc.Director:getInstance():popScene()
+    local platforms = {0,4,3,1,2,12,11}
+    umShare.curtom_share(platforms,"boardDismissCallback","shareCallback")
 end
 
 function socscene.create()
@@ -39,7 +72,7 @@ function socscene.create()
     local  item3 = cc.MenuItemFont:create("微信"):setPosition(cc.p(300,350))
     item3:registerScriptTapHandler(wx_share)
     local  item4 = cc.MenuItemFont:create("打开分享面板"):setPosition(cc.p(300,280))
-    item4:registerScriptTapHandler(facebook_share)
+    item4:registerScriptTapHandler(open_share)
     local  item5 = cc.MenuItemFont:create("打开分享不同内容分享面板"):setPosition(cc.p(300,210))
     item5:registerScriptTapHandler(twitter_share)
     local label = cc.Label:createWithSystemFont("分享回调结果","Arial", 50)
