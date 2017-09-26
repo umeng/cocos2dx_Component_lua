@@ -41,11 +41,22 @@ LOCAL_MODULE := cocos2dlua_shared
 
 LOCAL_MODULE_FILENAME := libcocos2dlua
 
-LOCAL_SRC_FILES := \
-../../../Classes/AppDelegate.cpp \
-hellolua/main.cpp
+LOCAL_SRC_FILES := hellolua/main.cpp \
+                    ../../../Classes/AppDelegate.cpp \
+                    ../../../Classes/analytics/lua_binding.cpp \
+                    ../../../Classes/analytics/MobClickCpp.cpp \
+                    ../../../Classes/analytics/DplusMobClickCpp.cpp \
+                    ../../../Classes/push/CCUMPushSDK.cpp \
+                    ../../../Classes/push/lua_push_binding.cpp \
+                    ../../../Classes/share/lua_share_binding.cpp \
+                    ../../../Classes/share/CCUMSocialSDK.cpp \
+                    ../../../Classes/Common/UMCCCommon.cpp
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes \
+                    $(LOCAL_PATH)/../../../Classes/analytics \
+                    $(LOCAL_PATH)/../../../Classes/push \
+                    $(LOCAL_PATH)/../../../Classes/share \
+                    $(LOCAL_PATH)/../../../Classes/Common
 
 # _COCOS_HEADER_ANDROID_BEGIN
 # _COCOS_HEADER_ANDROID_END

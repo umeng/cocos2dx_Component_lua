@@ -25,7 +25,7 @@ import com.umeng.socialize.PlatformConfig;
 
 public class App extends Application {
     static {
-        System.loadLibrary("cocos2dcpp");
+        System.loadLibrary("cocos2dlua");
     }
     private static final String TAG = App.class.getName();
     private Handler handler;

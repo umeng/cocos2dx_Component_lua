@@ -26,7 +26,47 @@ THE SOFTWARE.
 package org.cocos2dx.lua;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import com.umeng.analytics.UMGameAnalytics;
+import com.umeng.analytics.game.UMGameAgent;
+import com.umeng.message.PushAgent;
+import com.umeng.push.CCUMPushController;
+import com.umeng.social.CCUMSocialController;
+
+public class AppActivity extends Cocos2dxActivity{
+    private Activity mActivity = null;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e("cocos2d-x","AppActivity onCreate");
+        mActivity = this;
+        CCUMSocialController.initSocialSDK(mActivity);
+        CCUMPushController.initPushSDK(mActivity);
+        UMGameAnalytics.init(this);
+        PushAgent.getInstance(this).onAppStart();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
-public class AppActivity extends Cocos2dxActivity{  
+        // 授权回调
+        CCUMSocialController.onActivityResult(requestCode, resultCode, data);
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 集成游戏统计分析,初始化 Session
+        UMGameAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        // //集成游戏统计分析, 结束 Session
+        UMGameAgent.onPause(this);
+    }
 }

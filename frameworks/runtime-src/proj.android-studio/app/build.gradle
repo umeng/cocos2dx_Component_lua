@@ -7,8 +7,8 @@ android {
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-        applicationId "com.compent.org"
-        minSdkVersion 10
+        applicationId "com.umeng.soexample"
+        minSdkVersion 11
         targetSdkVersion PROP_TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
@@ -234,6 +234,7 @@ android.applicationVariants.all { variant ->
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':libcocos2dx')
+    compile project(':push')
 }
