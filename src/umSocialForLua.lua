@@ -184,7 +184,7 @@ end
      @return .
  ]]
 
-function umSocialForLua.curtom_share(platforms,boardDismissCallback,callback_str)
+function umSocialForLua.custom_share(platforms,boardDismissCallback,callback_str)
     umeng_customShare(platforms,boardDismissCallback,callback_str)
 end
 

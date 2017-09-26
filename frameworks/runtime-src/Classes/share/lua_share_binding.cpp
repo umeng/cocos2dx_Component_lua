@@ -56,6 +56,9 @@ static void delAuthorizeCallBack(int platform, int stCode,map<string, string>& d
     lua_call(ls, 3, 0);
 }
 static void directCallback(int platform, int stCode, string& errorMsg){
+    if (ls == NULL || directFun.empty()){
+        return;
+    }
     lua_getglobal(ls, directFun.c_str());
     lua_pushinteger(ls, platform);
     lua_pushinteger(ls, stCode);
@@ -86,8 +89,6 @@ static void getInfoCallback(int platform, int stCode, map<string, string>& data)
     lua_pushinteger(ls, platform);
     lua_pushinteger(ls, stCode);
     lua_newtable(ls);
-    lua_pushnumber(ls, -1); //push -1 into stack
-    lua_rawseti(ls, -2, 0);
     for(auto tag:data){
         tolua_pushcppstring(ls, tag.first);
         tolua_pushcppstring(ls, tag.second);
@@ -160,7 +161,7 @@ int lua_umeng_share_directShare(lua_State* L)
         if(!luaval_to_std_string(L, 6, &directFun, "umeng_directShare")){
             return UMENG_FAILED;
         }
-        umeng::CCUMSocialSDK::directShare(tags,text.c_str(),title.c_str(),url.c_str(),image.c_str(),ShareEventHandler(directCallback));
+        umeng::CCUMSocialSDK::directShare(tags,text.c_str(),title.c_str(),url.c_str(),image.c_str(),share_selector(directCallback));
         return UMENG_SUCCESS;
     }
     return UMENG_FAILED;
@@ -206,7 +207,7 @@ int lua_umeng_share_openShare(lua_State* L)
         if(!luaval_to_std_string(L, 7, &directFun, "umeng_openShare")){
             return UMENG_FAILED;
         }
-       umeng::CCUMSocialSDK::setBoardDismissCallback(boarddismiss_selector(boardCallBack)); umeng::CCUMSocialSDK::openShare(&platforms,text.c_str(),title.c_str(),url.c_str(),image.c_str(),ShareEventHandler(directCallback));
+       umeng::CCUMSocialSDK::setBoardDismissCallback(boarddismiss_selector(boardCallBack)); umeng::CCUMSocialSDK::openShare(&platforms,text.c_str(),title.c_str(),url.c_str(),image.c_str(),share_selector(directCallback));
         return UMENG_SUCCESS;
     }
     return UMENG_FAILED;

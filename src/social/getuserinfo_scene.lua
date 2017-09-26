@@ -3,16 +3,16 @@ cc.exports.userinfoscene = {}
 
 local umShare = require "umSocialForLua"
 
-local function getCallback(platform, stCode, data)
+function cc.exports.getUserInfoCallback(platform, stCode, data)
     local result = "";
-     if (stCode == 200) {
+     if (stCode == 200) then
          result = "获取成功";
         print("#### 获取成功");
-    } else if (stCode == 0) {
+    elseif (stCode == 0) then
         print("#### 获取出错");
-    } else if (stCode == -1) {
+    elseif (stCode == -1) then
         print("#### 取消获取");
-    }
+    end
     for k,v in pairs(data) do
         print("#### data  "..k.." -> "..v..".");
     end
@@ -26,15 +26,15 @@ local function back(sender)
 end
 
 local function qq(sender)
-    umShare.qq_getInfo("getCallback")
+    umShare.qq_getInfo("getUserInfoCallback")
 end
 
 local function sina(sender)
-    umShare.sina_getInfo("getCallback")
+    umShare.sina_getInfo("getUserInfoCallback")
 end
 
 local function wx(sender)
-    umShare.wx_getInfo("getCallback")
+    umShare.wx_getInfo("getUserInfoCallback")
 end
 
 
