@@ -22,7 +22,7 @@ using namespace std;
 // #include <android/log.h>
 // #endif
 #define VERSION "1.0"
-#define WRAP_TYPE "cocos2dx"
+#define WRAP_TYPE "cocos2dx_lua"
 
 
 // JNIEXPORT void JNICALL Java_com_umeng_common_UMCocosConfuture_Init(

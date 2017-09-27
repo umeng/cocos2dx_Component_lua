@@ -70,9 +70,11 @@ bool AppDelegate::applicationDidFinishLaunching()
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
+    /*umeng lua 接口注册开始*/
     lua_register_mobclick_module(L);
     lua_register_umpush_module(L);
     lua_register_umshare_module(L);
+    /*umeng lua 接口注册结束*/
     register_all_packages();
 
     LuaStack* stack = engine->getLuaStack();

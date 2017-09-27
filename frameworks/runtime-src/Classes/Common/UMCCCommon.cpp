@@ -58,8 +58,8 @@ JNIEXPORT void JNICALL Java_com_umeng_common_UMCocosConfigure_InitCC (
         return;
     }
      CCLog("2222");
-     jstring version = env->NewStringUTF("1111");
-    jstring type = env->NewStringUTF("2222");
+     jstring version = env->NewStringUTF(VERSION);
+    jstring type = env->NewStringUTF(WRAP_TYPE);
     
     // jstring version = env->NewStringUTF("1111");
     // jstring type = env->NewStringUTF("2222");

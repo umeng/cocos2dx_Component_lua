@@ -16,7 +16,10 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/analytics/MobClickCpp.cpp \
                    ../../../Classes/analytics/DplusMobClickCpp.cpp \
                    ../../../Classes/Common/UMCCCommon.cpp \
-                   ../../../Classes/HelloWorldScene.cpp
+                   ../../../Classes/HelloWorldScene.cpp \
+                   ../../../Classes/push/lua_push_binding.cpp \
+                   ../../../Classes/share/lua_share_binding.cpp \
+                   ../../../Classes/analytics/lua_binding.cpp 
 ```
 接着，将所有xxx_java文件中的java文件，放到Android工程中注意路径一定要是`com.umeng.common(analytics/push/social)`
 
@@ -44,6 +47,35 @@ UMCCCommon::init(UMENG_APPKEY, "app store");
 
 ```
 其中`init`第一个参数为友盟Appkey，第二个参数为渠道
+
+
+#include "lua_binding.h"
+#include "lua_push_binding.h"
+#include "lua_share_binding.h"
+在AppDelegate.cpp中的AppDelegate::applicationDidFinishLaunching函数中添加lua注册接口，如下所示：
+
+    // set default FPS
+    Director::getInstance()->setAnimationInterval(1.0 / 60.0f);
+    // register lua module
+    auto engine = LuaEngine::getInstance();
+    ScriptEngineManager::getInstance()->setScriptEngine(engine);
+    lua_State* L = engine->getLuaStack()->getLuaState();
+    lua_module_register(L);
+    
+    /*umeng lua 接口注册开始*/
+    lua_register_mobclick_module(L);
+    lua_register_umpush_module(L);
+    lua_register_umshare_module(L);
+    /*umeng lua 接口注册结束*/
+    
+    register_all_packages();
+
+    LuaStack* stack = engine->getLuaStack();
+    stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
+
+将需要的MobClickForLua.lua、umPushForLua.lua、umSocialForLua.lua文件放到你自己的lua路径中。
+（其中需要那部分功能可以只添加相应的文件，如统计：MobClickForLua.lua,push:umPushForLua.lua,share:umSocialForLua.lua,接口注册是也是如此）
+
 # 统计
 ## Android
 1.1android-studio集成方式：
@@ -58,6 +90,18 @@ umeng-common-1.3.2.jar以及cocos的统计jar包导入到libs中，
         UMCocosConfigure.init(this, "59892f08310c9307b60023d0", "Umeng", UMConfigure.DEVICE_TYPE_PHONE,
             "669c30a9584623e70e8cd01b0381dcb4");
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 集成游戏统计分析,初始化 Session
+        UMGameAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        // //集成游戏统计分析, 结束 Session
+        UMGameAgent.onPause(this);
+    }
 
 ```
 UMGameAnalytics.init需要放到UMCocosConfigure.init之前，因为要先设置游戏统计场景，不然游戏统计不生效。
@@ -67,7 +111,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/analytics/MobClickCpp.cpp \
                    ../../../Classes/analytics/DplusMobClickCpp.cpp \
                    ../../../Classes/Common/UMCCCommon.cpp \
-                   ../../../Classes/HelloWorldScene.cpp
+                   ../../../Classes/HelloWorldScene.cpp \
+                   ../../../Classes/analytics/lua_binding.cpp
 ```
 ## iOS
 所需文件：DplusMobClickCpp.h、DplusMobClickCpp.mm、MobClickCpp.h、MobClickCpp.mm、UMAnalytics.framework、UMCCCommon.h、UMCCCommon.mm、UMCommon.framework
@@ -90,7 +135,8 @@ umeng::MobClickCpp::init()需要再UMCCCommon::init(UMENG_APPKEY, "app store")�
 事件数量统计  
 在您希望跟踪的代码部分，调用如下方法：       
 ```
-umeng::MobClickCpp::event(const char * eventId, const char * label = NULL);
+c++:umeng::MobClickCpp::event(const char * eventId, const char * label = NULL);
+lua:MobClickForLua.event(eventId,...)
 ```
 
 `eventId`为当前统计的事件ID。      
@@ -100,17 +146,21 @@ umeng::MobClickCpp::event(const char * eventId, const char * label = NULL);
 示例：统计微博应用中"转发"事件发生的次数，那么在转发的函数里调用
 ```
 umeng::MobClickCpp::event("Forward");
+MobClickForLua.event("Forward")
 ```
     
 示例： 统计游戏中“死亡”事件发生的关卡数，那么可以在死亡的函数里调用
 ```
 umeng::MobClickCpp::event("player_dead", "level");
+MobClickForLua.event("player_dead", "level");
 ```
       
 考虑事件在一个属性上的取值，可以调用如下方法：
  
 ```
 umeng::MobClickCpp::event(const char *eventId, eventDict *attributes)
+local table = {"name"="test","addr"="china"}
+MobClickForLua.event("eventId", table)
 ```
 
 `attributes`为当前事件的属性和取值（键值对）。
@@ -119,9 +169,9 @@ umeng::MobClickCpp::event(const char *eventId, eventDict *attributes)
 示例：统计电商应用中“购买”事件发生的次数，以及购买的商品类型及数量，那么在购买的函数里调用：     
 ```
 umeng::eventDict dict;
-dict["type"] = "book";
-dict["quantity"] = "3";
 umeng::MobClickCpp::event("purchase", &dict);
+local dict = {"type"="book","quantity"=3}
+MobClickForLua.event("purchase", dict);
 ```
 计算事件
 使用计算事件需要在后台添加事件时选择“计算事件”。
@@ -130,6 +180,7 @@ umeng::MobClickCpp::event("purchase", &dict);
 
 ```
 umeng::MobClickCpp::event(const char *eventId, eventDict *attributes, int counter);
+MobClickForLua.event(eventId,attributes,counter);
 ```
 注意事项
 id， ts， du是保留字段，不能作为eventId及key的名称。
@@ -142,10 +193,12 @@ id， ts， du是保留字段，不能作为eventId及key的名称。
 需要配对使用,如
 ```
   umeng::MobClickCpp::beginLogPageView("PageOne");
+  MobClickForLua.beginLogPageView("PageOne");
 ```
 
 ```
   umeng::MobClickCpp::endLogPageView("PageOne");
+  MobClickForLua.endLogPageView("PageOne");
 ```
 
   注意： 
@@ -158,88 +211,108 @@ id， ts， du是保留字段，不能作为eventId及key的名称。
 游戏方法详解
 ```
 // 设置玩家等级.
-void umeng::MobClickCpp::setUserLevel(int level);
-umeng::MobClickCpp::setUserLevel(9);
+  void umeng::MobClickCpp::setUserLevel(int level);
+  umeng::MobClickCpp::setUserLevel(9);
+  MobClickForLua.setUserLevel(9);
 ```
 ```
 // 充值.
-void umeng::MobClickCpp::pay(double cash, int source, double coin);
-umeng::MobClickCpp::pay(10, 2, 1000);
+  void umeng::MobClickCpp::pay(double cash, int source, double coin);
+  umeng::MobClickCpp::pay(10, 2, 1000);
+  MobClickForLua.pay(10, 2, 1000);
 // 充值并购买道具.
-void umeng::MobClickCpp::pay(double cash, int source, const char * item, int amount, double price);
-umeng::MobClickCpp::pay(10, 2, "magic_bottle", 2, 500);
+  void umeng::MobClickCpp::pay(double cash, int source, const char * item, int amount, double price);
+  umeng::MobClickCpp::pay(10, 2, "magic_bottle", 2, 500);
+  MobClickForLua.pay(10, 2, "magic_bottle", 2, 500);
 ```
 ```
 // 购买道具.
-void umeng::MobClickCpp::buy(const char *item, int amount, double price);
-umeng::MobClickCpp::buy("helmet", 1, 1000);
+  void umeng::MobClickCpp::buy(const char *item, int amount, double price);
+  umeng::MobClickCpp::buy("helmet", 1, 1000);
+  MobClickForLua.buy("helmet", 1, 1000);
 ```
 ```
 // 消耗道具.
-void umeng::MobClickCpp::use(const char *item, int amount, double price);
-umeng::MobClickCpp::use("magic_bottle", 2, 50);
+  void umeng::MobClickCpp::use(const char *item, int amount, double price);
+  umeng::MobClickCpp::use("magic_bottle", 2, 50);
+  MobClickForLua.use("magic_bottle", 2, 50)
 ```
 ```
 // 奖励金币.
-void umeng::MobClickCpp::bonus(double coin, int source);
-umeng::MobClickCpp::bonus(10.0,3);
+  void umeng::MobClickCpp::bonus(double coin, int source);
+  umeng::MobClickCpp::bonus(10.0,3);
+  MobClickForLua.bonus(10.0,3);
 // 奖励道具.
-void umeng::MobClickCpp::bonus(const char *item, int amount, double price, int source);
-umeng::MobClickCpp::bonus("daoju",5,10.0,3);
+  void umeng::MobClickCpp::bonus(const char *item, int amount, double price, int source);
+  umeng::MobClickCpp::bonus("daoju",5,10.0,3);
+  MobClickForLua.bonus("daoju",5,10.0,3);
 ```
 ```
 // 进入关卡.
-void umeng::MobClickCpp::startLevel(const char *level);
+  void umeng::MobClickCpp::startLevel(const char *level);
+  MobClickForLua.startLevel("level")
 // 通过关卡.
-void umeng::MobClickCpp::finishLevel(const char *level);
+  void umeng::MobClickCpp::finishLevel(const char *level);
+  MobClickForLua.finishLevel("level")
 // 未通过关卡.
-void umeng::MobClickCpp::failLevel(const char *level);
+  void umeng::MobClickCpp::failLevel(const char *level);
+  MobClickForLua.failLevel("level")
 ```
 ```
 // 订单充值.
-void exchange(const char *orderId, double currencyAmount, const char *currencyType,double virtualAmount,int channel)
-umeng::MobClickCpp::exchange("test_order",648.0,"CNY",6480,1);
+  void exchange(const char *orderId, double currencyAmount, const char *currencyType,double virtualAmount,int channel)
+  umeng::MobClickCpp::exchange("test_order",648.0,"CNY",6480,1);
+  MobClickForLua.exchange("test_order",648.0,"CNY",6480,1)
 ```
 ```
 track事件
 自定义track事件
-void track(const char * eventName, eventDict* property = NULL)
+  void track(const char * eventName, eventDict* property = NULL)
+  local lucky= {john="chips" ,jane ="lemonade",jolene="egg salad" }
+  MobClickForLua.track("test_1",lucky)
 ```
 ```
 超级属性
 对Dplus的事件，可以设置持久化的超级属性，如果用户具有某些典型特征（例如账号信息），或者需要按照某些特征（例如广告来源）分析用户的行为，那么可通过以下方法为用户标记超级属性：
 
 // 设置超级属性集, 标记超级属性后,该用户后续触发的所有行为事件都将自动包含这些属性；且这些属性存入系统文件，APP重启后仍然存在。
-umeng::eventDict beginPayMap;
-beginPayMap.insert(std::make_pair("userid", std::string("userid-xuezhi")));
-beginPayMap.insert(std::make_pair("ordeid", std::string("xxxxxx")));
-beginPayMap.insert(std::make_pair("item", std::string("test-xuezhi")));
-beginPayMap.insert(std::make_pair("amout", "100"));
-umeng::DplusMobClickCpp::registerSuperProperty(&beginPayMap);
+  umeng::eventDict beginPayMap;
+  beginPayMap.insert(std::make_pair("userid", std::string("userid-xuezhi")));
+  beginPayMap.insert(std::make_pair("ordeid", std::string("xxxxxx")));
+  beginPayMap.insert(std::make_pair("item", std::string("test-xuezhi")));
+  beginPayMap.insert(std::make_pair("amout", "100"));
+  umeng::DplusMobClickCpp::registerSuperProperty(&beginPayMap);
+
+  local lucky= {john="chips" ,jane ="lemonade",jolene="egg salad" }
+  MobClickForLua.registerSuperProperty(lucky)
+
 /*针对同一超级属性，设定的新值会改写旧值。*/
 
 // 获取某一个超级属性值
-std::string pName = umeng::DplusMobClickCpp::getSuperProperty("item");
-
+  std::string pName = umeng::DplusMobClickCpp::getSuperProperty("item");
+  print(MobClickForLua.getSuperProperty("jane"))
 // 获取所有超级属性值
-std::string testMap = umeng::DplusMobClickCpp::getSuperProperties();
-
+  std::string testMap = umeng::DplusMobClickCpp::getSuperProperties();
+  print(MobClickForLua.getSuperProperties())
 // 删除某一个超级属性
-umeng::DplusMobClickCpp::unregisterSuperProperty("userid");
-
+  umeng::DplusMobClickCpp::unregisterSuperProperty("userid");
+  MobClickForLua.unregisterSuperProperty("john")
 // 删除所有超级属性
-umeng::DplusMobClickCpp::clearSuperProperties();
+  umeng::DplusMobClickCpp::clearSuperProperties();
+  MobClickForLua.clearSuperProperties()
 ```
 ```
 //设置关注首次触发track事件.
-umeng::DplusMobClickCpp::setFirstLaunchEvent(std::vector<std::string>* eventIdList)
+  umeng::DplusMobClickCpp::setFirstLaunchEvent(std::vector<std::string>* eventIdList)
 //比如用户首次付费,因为不同原因可以如下集成:
-std::vector<std::string> fisLaunchList;
-fisLaunchList.push_back("pay_p");
-fisLaunchList.push_back("pay_because_dabai");
-fisLaunchList.push_back("pay_because_deng");
- ...  ...
-umeng::DplusMobClickCpp::setFirstLaunchEvent(&fisLaunchList);
+  std::vector<std::string> fisLaunchList;
+  fisLaunchList.push_back("pay_p");
+  fisLaunchList.push_back("pay_because_dabai");
+  fisLaunchList.push_back("pay_because_deng");
+  ...  ...
+  umeng::DplusMobClickCpp::setFirstLaunchEvent(&fisLaunchList);
+  local first = {"Lua", "Tutorial"}
+  MobClickForLua.setFirstLaunchEvent(first)
 ```
 # 推送
 ## Android
@@ -263,6 +336,7 @@ Push SDK 的平台配置与单独 Native 项目集成相同，请参考 [接入P
 
 ```
  umeng::CCUMPushSDK::addTags("tag", push_remain_selector(remainCallback));
+ umPushForLua.umPushForLua.addTags(tag,callback_str)
 ```
 第一个参数为tag
 第二个参数为回调，回调如下:
@@ -271,16 +345,25 @@ Push SDK 的平台配置与单独 Native 项目集成相同，请参考 [接入P
 void remainCallback(int stCode,int remain){
    }
 ```
+lua接口第二个参数是回调函数名字字符串，用于在c++层面回调lua函数，回调函数如下：
+```
+function cc.exports.callback(stCode,remain)
+    print("stCode is "..stCode)
+    print("remain is "..remain)
+end
+```
 stCode为200标识成功，remain为剩余值
 ### 删除tag
 ```
  umeng::CCUMPushSDK::deleteTags("tag", push_remain_selector(remainCallback));
+ umPushForLua.umPushForLua.deleteTags(tag,callback_str)
 ```
 第一个参数为tag
 第二个参数为回调
 ### 展示tags
 ```
   umeng::CCUMPushSDK::getTags(push_gettag_selector(tagsCallback));
+  umPushForLua.getTags(callback_str)
 ```
 其中回调为：
 
@@ -300,10 +383,21 @@ void tagsCallback(int stCode, list<string>& data){
     item->setString(string_temp);
 }
 ```
+其中lua回调函数如下：
+```
+function cc.exports.tagCallBack(stCode, listdata)
+    print("stCode is "..stCode)
+    print("#listdata:"..#(listdata))       -->4  
+    for i = 1, #(listdata) do  
+        print(listdata[i])  -->1 2 3 4  
+    end 
+end
+```
 ### 增加alias，不清空已绑定alias
 
 ```
 umeng::CCUMPushSDK::addAlias("alias", "type", push_alias_selector(aliasCallback));
+umPushForLua.addAlias(name,type,callback_str)
 ```
 其中第一个参数为alias
 第二个参数为type，
@@ -314,11 +408,18 @@ void aliasCallback(int stCode){
  
 }
 ```
+lua回调如下：
+```
+function cc.exports.aliasCallback(stCode)
+    print("stCode is "..stCode)
+end
+```
 stCode为200标识成功
 ### 增加alias，清空已绑定alias
 
 ```
 umeng::CCUMPushSDK::setAlias("alias", "type", push_alias_selector(aliasCallback));
+umPushForLua.setAlias(name,type,callback_str)
 ```
 其中第一个参数为alias
 第二个参数为type，
@@ -334,6 +435,7 @@ stCode为200标识成功
 
 ```
 umeng::CCUMPushSDK::removeAlias("alias", "type", push_alias_selector(aliasCallback));
+umPushForLua.removeAlias(name,type,callback_str)
 ```
 其中第一个参数为alias
 第二个参数为type，
@@ -397,9 +499,12 @@ UShare SDK 的平台配置与单独 Native 项目集成相同，请参考 [接�
 ### 直接分享
 
 ```
- umeng::CCUMSocialSDK::directShare(QQ,
+  umeng::CCUMSocialSDK::directShare(QQ,
                      "Umeng Social Cocos2d-x SDK -->  qqshare   testing","title" ,"","res/closenormal",
                      share_selector(shareCallback));
+
+  umSocialForLua.xx_share(text,title,targeturl,imgName,callback_str)
+  xx对应平台，如qq，sina，微信
 ```
 
 * 第一个参数是平台，是一个int值，传入我们提前写好的枚举变量（CCUMSocialSDK.h中）即可:
@@ -451,7 +556,12 @@ enum Platform {
 ```
 void shareCallback(int platform, int stCode, string& errorMsg) {
     }
-```               
+```     
+lua回调如下：
+```
+function cc.exports.shareCallback(platform, stCode, errorMsg)
+end
+```        
 ### 分享面板分享
 
 ```
@@ -465,6 +575,8 @@ vector<int>* platforms = new vector<int>();
     platforms->push_back(FACEBOOK);
      umeng::CCUMSocialSDK::setBoardDismissCallback(boarddismiss_selector(boardDismissCallback));
      umeng::CCUMSocialSDK::openShare(platforms, "来自分享面板", "title" ,"https://dev.umeng.com/images/tab2_1.png","https://wsq.umeng.com/",share_selector(shareCallback));
+
+    umSocialForLua.open_share(platforms,text,title,targeturl,imgName,boardDismissCallback_str,callback_str)
 ```
 #### setBoardDismissCallback
 分享面板消失回调，示例如下：
@@ -475,6 +587,12 @@ void boardDismissCallback() {
     log("dismiss");
     
 }
+```
+lua回调如下：
+```
+function cc.exports.boardDismissCallback() 
+    print("share dismiss");
+end
 ```
 #### openShare
 * 第一个参数为分享平台数据
@@ -497,6 +615,7 @@ void boardDismissCallback() {
       platforms->push_back(TWITTER);
      umeng::CCUMSocialSDK::setBoardDismissCallback(boarddismiss_selector(boardDismissCallback));
      umeng::CCUMSocialSDK::openCustomShare(platforms, board_selector(boardCallback));
+     umSocialForLua.custom_share(platforms,boardDismissCallback_str,callback_str)
 ```
 `openCustomShare`中个参数的含义如下：
 
@@ -526,11 +645,34 @@ void boardCallback(int platform) {
     
 }
 ```
+lua回调如下：
+```
+function cc.exports.custom_callback( platform )
+
+     if (platform == umSharePlatform["QQ"]) then
+
+        umShare.qq_share("Umeng Social Cocos2d-x SDK -->  qqshare   DIFFERENT CONTENT","title" ,"","res/closenormal",
+                          "shareCallback");
+
+     elseif(platform == umSharePlatform["WEIXIN"]) then
+
+         umShare.wx_share("Umeng Social Cocos2d-x SDK -->  wxshare   DIFFERENT CONTENT","title" ,"","CloseSelected.png",
+                                 "shareCallback");
+    else
+        umShare.sina_share("Umeng Social Cocos2d-x SDK -->  sinashare   DIFFERENT CONTENT","title" ,"","res/closenormal",
+                          "shareCallback");
+     end
+    
+end
+```
 ### 授权
 授权接口只能拿到uid和token信息，不推荐使用：
 
 ```
  umeng::CCUMSocialSDK::authorize(QQ, auth_selector(authCallback));
+ umSocialForLua.xx_authorize(callback_str)
+ umSocialForLua.xx_del_authorize(callback_str)
+ xx为平台，如qq，sina，wx，facebook等
 ```
 * 第一个参数为平台，各平台定义请参照直接分享
 * 第二个参数为授权回调:
@@ -540,6 +682,11 @@ void authCallback(int platform, int stCode, map<string, string>& data) {
 
 }
 ```
+lua回调如下：
+```
+function cc.exports.authCallback(platform, stCode, data)
+end
+```
 其中map为用户信息
 
 ### 获取用户资料
@@ -547,6 +694,8 @@ void authCallback(int platform, int stCode, map<string, string>& data) {
 
 ```
  umeng::CCUMSocialSDK::getPlatformInfo(QQ, auth_selector(getCallback));
+ umSocialForLua.xx_getInfo(callback_str)
+ xx为平台类型如qq、sina、微信等
 ```
 * 第一个参数为平台，各平台定义请参照直接分享
 * 第二个参数为授权回调:
@@ -556,7 +705,12 @@ void getCallback(int platform, int stCode, map<string, string>& data) {
 
 }
 ```
-其中map为用户信息
+lua回调如下：
+```
+function cc.exports.getUserInfoCallback(platform, stCode, data)
+end
+```
+其中map或data为用户信息
 
 
 
