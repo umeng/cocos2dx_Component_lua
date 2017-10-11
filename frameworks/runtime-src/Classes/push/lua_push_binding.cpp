@@ -89,6 +89,7 @@ int lua_umeng_push_addTags(lua_State* L)
         if(!luaval_to_std_string(L, 1, &tags, "umeng_addTags")){
             return UMENG_FAILED;
         }
+        addtagFun="";
         if(!luaval_to_std_string(L, 2, &addtagFun, "umeng_addTags")){
             return UMENG_FAILED;
         }

@@ -22,15 +22,15 @@ public class UMCocosConfigure {
 
         Method method = null;
         try {
-            Log.e("xxxxxx","v="+v+"  t="+t);
-            Class<?> config = Class.forName("com.umeng.commonsdk.UMConfigure");
-            method = config.getDeclaredMethod("setWraperType", String.class, String.class);
-            method.setAccessible(true);
-            method.invoke(null, v,t);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        Log.e("xxxxxx","v="+v+"  t="+t);
+        Class<?> config = Class.forName("com.umeng.commonsdk.UMConfigure");
+        method = config.getDeclaredMethod("setWraperType", String.class, String.class);
+        method.setAccessible(true);
+        method.invoke(null, v,t);
+    } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | ClassNotFoundException e) {
+        e.printStackTrace();
     }
+}
     public static void setLog(boolean able){
         Log.e("cocos2d-x","success");
        UMConfigure.setLogEnabled(able);

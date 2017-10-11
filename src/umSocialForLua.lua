@@ -2,128 +2,61 @@ cc.exports.umSocialForLua = {}
 
 
 cc.exports.umSharePlatform = {
-    --新浪微博
-    SINA = 0,
-    --微信
-    WEIXIN = 1,
-    --微信朋友圈
-    WEIXIN_CIRCLE = 2,
-    -- QQ
-    QQ = 3,
-    -- QQ空间
+    QQ = 0,
+    SINA = 1,
+    WEIXIN = 2,
+    WEIXIN_CIRCLE = 3,
     QZONE = 4,
-    -- 人人网
-    RENREN = 5,
-    -- 豆瓣
-    DOUBAN = 6,
-    -- 来往
-    LAIWANG = 7,
-    --- 来往动态
-    LAIWANG_CIRCLE = 8,
-    -- 易信
-    sYIXIN = 9,
-    -- 易信朋友圈
-    YIXIN_CIRCLE = 10,
-    -- facebook
-    FACEBOOK = 11,
-    -- twitter
-    TWITTER = 12,
-    -- instagram
-    INSTAGRAM = 13,
-    -- 短信
-    SMS = 14,
-    -- 邮件
-    EMAIL = 15,
-    -- 腾讯微博
-    TENCENT_WEIBO = 16
+    EMAIL = 5,
+    SMS = 6,
+    FACEBOOK = 7,
+    TWITTER = 8,
+    WEIXIN_FAVORITE = 9,
+    GOOGLEPLUS = 10,
+    RENREN = 11,
+    TENCENT = 12,
+    DOUBAN = 13,
+    FACEBOOK_MESSAGER = 14,
+    YIXIN = 15,
+    YIXIN_CIRCLE = 16,
+    INSTAGRAM = 17,
+    PINTEREST = 18,
+    EVERNOTE = 19,
+    POCKET = 20,
+    LINKEDIN = 21,
+    FOURSQUARE = 22,
+    YNOTE = 23,
+    WHATSAPP = 24,
+    LINE = 25,
+    FLICKR = 26,
+    TUMBLR = 27,
+    ALIPAY = 28,
+    KAKAO = 29,
+    DROPBOX = 30,
+    VKONTAKTE = 31,
+    DINGTALK = 32,
+    MORE = 33
 };
---[[ qq授权
+--[[ 授权
+     @platform 平台
      @callback 回调接口
      @return .
  ]]
-function umSocialForLua.QQ_authorize(callback_str)
-    umeng_authorize(umSharePlatform["QQ"],callback_str)
+function umSocialForLua.authorize(platform,callback_str)
+    umeng_authorize(platform,callback_str)
 end
 --[[ qq取消授权
+     @platform 平台
      @callback 回调接口
      @return .
  ]]
 
-function umSocialForLua.QQ_del_authorize(callback_str)
-    umeng_del_authorize(umSharePlatform["QQ"],callback_str)
-end
---[[ sina授权
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.sina_authorize(callback_str)
-    umeng_authorize(umSharePlatform["SINA"],callback_str)
+function umSocialForLua.del_authorize(platform,callback_str)
+    umeng_del_authorize(platform,callback_str)
 end
 
---[[ qq取消授权
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.sina_del_authorize(callback_str)
-    umeng_del_authorize(umSharePlatform["SINA"],callback_str)
-end
---[[ wx授权
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.wx_authorize(callback_str)
-    umeng_authorize(umSharePlatform["WEIXIN"],callback_str)
-end
-
---[[ wx取消授权
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.wx_del_authorize(callback_str)
-    umeng_del_authorize(umSharePlatform["WEIXIN"],callback_str)
-end
-
---[[ facebook授权
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.facebook_authorize(callback_str)
-    umeng_authorize(umSharePlatform["FACEBOOK"],callback_str)
-end
-
---[[ facebook取消授权
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.facebook_del_authorize(callback_str)
-    umeng_del_authorize(umSharePlatform["FACEBOOK"],callback_str)
-end
-
---[[ twitter授权
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.twitter_authorize(callback_str)
-    umeng_authorize(umSharePlatform["TWITTER"],callback_str)
-end
-
---[[ twitter取消授权
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.twitter_del_authorize(callback_str)
-    umeng_del_authorize(umSharePlatform["TWITTER"],callback_str)
-end
-
---[[ qq分享
+--[[ 分享
+     @platform 平台
      @text 文本
      @title 标题
      @targeturl 目标url
@@ -132,34 +65,8 @@ end
      @return .
  ]]
 
-function umSocialForLua.qq_share(text,title,targeturl,imgName,callback_str)
-    umeng_directShare(umSharePlatform["QQ"],text,title,targeturl,imgName,callback_str)
-end
-
---[[ sina分享
-     @text 文本
-     @title 标题
-     @targeturl 目标url
-     @imgName   图片名称
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.sina_share(text,title,targeturl,imgName,callback_str)
-    umeng_directShare(umSharePlatform["SINA"],text,title,targeturl,imgName,callback_str)
-end
-
---[[ 微信分享
-     @text 文本
-     @title 标题
-     @targeturl 目标url
-     @imgName   图片名称
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.wx_share(text,title,targeturl,imgName,callback_str)
-    umeng_directShare(umSharePlatform["WEIXIN"],text,title,targeturl,imgName,callback_str)
+function umSocialForLua.share(platform,text,title,targeturl,imgName,callback_str)
+    umeng_directShare(platform,text,title,targeturl,imgName,callback_str)
 end
 
 --[[ 打开分享界面
@@ -194,26 +101,8 @@ end
      @return .
  ]]
 
-function umSocialForLua.qq_getInfo(callback_str)
-    umeng_getInfo(umSharePlatform["QQ"],callback_str)
-end
-
---[[ 获取用户sina信息
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.sina_getInfo(callback_str)
-    umeng_getInfo(umSharePlatform["SINA"],callback_str)
-end
-
---[[ 获取用户wx信息
-     @callback 回调接口
-     @return .
- ]]
-
-function umSocialForLua.wx_getInfo(callback_str)
-    umeng_getInfo(umSharePlatform["WEIXIN"],callback_str)
+function umSocialForLua.getInfo(platform,callback_str)
+    umeng_getInfo(platform,callback_str)
 end
 
 return cc.exports.umSocialForLua

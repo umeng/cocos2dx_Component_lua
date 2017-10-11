@@ -37,43 +37,43 @@ local function back(sender)
 end
 local function qq_authorize(sender)
     -- body
-    umShare.QQ_authorize("authCallback")
+    umShare.authorize(umSharePlatform["QQ"],"authCallback")
 end
 local function qq_del_authorize(sender)
     -- body
-    umShare.QQ_del_authorize("authCallback")
+    umShare.del_authorize(umSharePlatform["QQ"],"authCallback")
 end
 local function sina_authorize(sender)
     -- body
-    umShare.sina_authorize("authCallback")
+    umShare.authorize(umSharePlatform["SINA"],"authCallback")
 end
 local function sina_del_authorize(sender)
     -- body
-    umShare.sina_del_authorize("authCallback")
+    umShare.del_authorize(umSharePlatform["SINA"],"authCallback")
 end
 local function wx_authorize(sender)
     -- body
-    umShare.wx_authorize("authCallback")
+    umShare.authorize(umSharePlatform["WEIXIN"],"authCallback")
 end
 local function wx_del_authorize(sender)
     -- body
-    umShare.wx_del_authorize("authCallback")
+    umShare.del_authorize(umSharePlatform["WEIXIN"],"authCallback")
 end
 local function facebook_authorize(sender)
     -- body
-    umShare.facebook_authorize("authCallback")
+    umShare.authorize(umSharePlatform["FACEBOOK"],"authCallback")
 end
 local function facebook_del_authorize(sender)
     -- body
-    umShare.facebook_del_authorize("authCallback")
+    umShare.del_authorize(umSharePlatform["FACEBOOK"],"authCallback")
 end
 local function twitter_authorize(sender)
     -- body
-    umShare.twitter_authorize("authCallback")
+    umShare.authorize(umSharePlatform["TWITTER"],"authCallback")
 end
 local function twitter_del_authorize(sender)
     -- body
-    umShare.twitter_del_authorize("authCallback")
+    umShare.del_authorize(umSharePlatform["TWITTER"],"authCallback")
 end
 
 function authorizescene.create()

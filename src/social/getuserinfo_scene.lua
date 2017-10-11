@@ -26,15 +26,15 @@ local function back(sender)
 end
 
 local function qq(sender)
-    umShare.qq_getInfo("getUserInfoCallback")
+    umShare.getInfo(umSharePlatform["QQ"],"getUserInfoCallback")
 end
 
 local function sina(sender)
-    umShare.sina_getInfo("getUserInfoCallback")
+    umShare.getInfo(umSharePlatform["SINA"],"getUserInfoCallback")
 end
 
 local function wx(sender)
-    umShare.wx_getInfo("getUserInfoCallback")
+    umShare.getInfo(umSharePlatform["WEIXIN"],"getUserInfoCallback")
 end
 
 

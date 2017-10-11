@@ -58,16 +58,16 @@ local function back(sender)
 end
 local function qq_share(sender)
     -- body
-    umShare.qq_share("Umeng Social Cocos2d-x SDK -->  qqshare   testing","title" ,"","res/closenormal","shareCallback")
+    umShare.share(umSharePlatform["QQ"],"Umeng Social Cocos2d-x SDK -->  qqshare   testing","title" ,"","res/closenormal","shareCallback")
 end
 local function sina_share(sender)
     -- body
-    umShare.sina_share("Umeng Social Cocos2d-x SDK -->sinashare testing","title" ,"https://wsq.umeng.com/","https://dev.umeng.com/images/tab2_1.png","shareCallback")
+    umShare.share(umSharePlatform["SINA"],"Umeng Social Cocos2d-x SDK -->sinashare testing","title" ,"https://wsq.umeng.com/","https://dev.umeng.com/images/tab2_1.png","shareCallback")
 end
 
 local function wx_share(sender)
     -- body
-    umShare.wx_share("Umeng Social Cocos2d-x SDK -->  wxshare   testing","title" ,"https://wsq.umeng.com/","https://dev.umeng.com/images/tab2_1.png","shareCallback")
+    umShare.share(umSharePlatform["WEIXIN"],"Umeng Social Cocos2d-x SDK -->  wxshare   testing","title" ,"https://wsq.umeng.com/","https://dev.umeng.com/images/tab2_1.png","shareCallback")
 end
 
 local function open_share(sender)
