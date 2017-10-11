@@ -32,6 +32,8 @@
 #import "MobClickCpp.h"
 #import <UMPush/UMessage.h>
 #import <UserNotifications/UserNotifications.h>
+@interface AppController()<UNUserNotificationCenterDelegate>
+@end
 @implementation AppController
 
 @synthesize window;
@@ -49,7 +51,7 @@ static AppDelegate s_sharedApplication;
     UMCCCommon::init(UMENG_APPKEY, "app store");
     log("didFinishLaunchingWithOptions");
     [self setupUSharePlatforms];   // required: setting platforms on demand
-    //[UNUserNotificationCenter currentNotificationCenter].delegate = self;
+    [UNUserNotificationCenter currentNotificationCenter].delegate = self;
     UMessageRegisterEntity * entity = [[UMessageRegisterEntity alloc]init];
     entity.types = UMessageAuthorizationOptionAlert | UMessageAuthorizationOptionBadge | UMessageAuthorizationOptionSound;
     [UMessage registerForRemoteNotificationsWithLaunchOptions:launchOptions Entity:entity completionHandler:^(BOOL granted, NSError * _Nullable error) {
