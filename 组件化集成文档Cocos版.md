@@ -21,6 +21,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/share/lua_share_binding.cpp \
                    ../../../Classes/analytics/lua_binding.cpp 
 ```
+注意：如果cocos是2.x版本的还需要将LuaBasicConversions.cpp添加进去
+
 接着，将所有xxx_java文件中的java文件，放到Android工程中注意路径一定要是`com.umeng.common(analytics/push/social)`
 
 >这里注意push_java中有一个pushmodule，使用方法请参照下面的push文档
@@ -35,6 +37,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 其中`init`方法第一个参数为Context，第二个参数为友盟Appkey，第三个参数为渠道，第四个参数为硬件类型，第五个参数为push Secret
 ## iOS
 将所有需要的组件的库文件放到iOS工程中，然后将所有xxx_cc中的.h文件和.mm文件引入到iOS工程中：
+
+注意：如果cocos是2.x版本的还需要将LuaBasicConversions.cpp添加进去
 
 ![](http://upload-images.jianshu.io/upload_images/1483670-71df6dea695206b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
