@@ -1,0 +1,26 @@
+{
+    "name": "sharecocoslua",
+    "description": "社会化分享Cocos2dx-lua版本桥接文件，平台库请点选Android或iOS下载",
+    "Description":"为用户集成便利，提供了多种H5框架的集成sdk接口，请根据应用的H5开发框架选择不同服务，若为原生应用，只选择 “基础包”即可",
+    "title": "Social SDK 5.0.0",
+    "docslink": "http://dev.umeng.com/sdk_integate/android_sdk/android_common_guide",
+    "notice": "社会化分享Cocos2dx-lua版本桥接文件，平台库请点选Android或iOS下载",
+    "show": 1,
+    "required": 0,
+    "display_platform": "Cocos2dx lua",
+    "packages": [
+          {
+            "required": 1,
+            "docslink": "",
+            "key": "cocosluashare",
+            "description": "",
+            "title": "",
+            "destination": "",
+            "files": [
+                "UMCocosLua/share/share_cc/*",
+                "UMCocosLua/share/share_java/*",
+                "UMCocosLua/share/umSocialForLua.lua"
+            ]
+        }
+       ]
+}
