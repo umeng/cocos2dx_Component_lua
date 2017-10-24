@@ -36,15 +36,15 @@ function cc.exports.custom_callback( platform )
 
      if (platform == umSharePlatform["QQ"]) then
 
-        umShare.qq_share("Umeng Social Cocos2d-x SDK -->  qqshare   DIFFERENT CONTENT","title" ,"","res/closenormal",
+        umShare.share(umSharePlatform["QQ"],"Umeng Social Cocos2d-x SDK -->  qqshare   DIFFERENT CONTENT","title" ,"","res/closenormal",
                           "shareCallback");
 
      elseif(platform == umSharePlatform["WEIXIN"]) then
 
-         umShare.wx_share("Umeng Social Cocos2d-x SDK -->  wxshare   DIFFERENT CONTENT","title" ,"","CloseSelected.png",
+         umShare.share(umSharePlatform["WEIXIN"],"Umeng Social Cocos2d-x SDK -->  wxshare   DIFFERENT CONTENT","title" ,"","CloseSelected.png",
                                  "shareCallback");
     else
-        umShare.sina_share("Umeng Social Cocos2d-x SDK -->  sinashare   DIFFERENT CONTENT","title" ,"","res/closenormal",
+        umShare.share(umSharePlatform["SINA"],"Umeng Social Cocos2d-x SDK -->  sinashare   DIFFERENT CONTENT","title" ,"","res/closenormal",
                           "shareCallback");
      end
     
