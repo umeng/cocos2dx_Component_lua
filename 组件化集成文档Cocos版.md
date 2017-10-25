@@ -1,7 +1,7 @@
 # 工程配置
 首先需要说明，Cocos2dx下载的只是桥接文件，不含最新版本的jar，对应组件的jar请去[下载中心](http://mobile.umeng.com/custom_sdk)下载。
 如果对于文档仍有疑问的，请参照我们在github上的[demo](https://github.com/umeng/cocos2dx_Component)
-请留意：demo使用xcode9编译会报错，请使用xcode8及以下版本运行demo。
+
 ## Android
 将所有需要的组件的jar放到Android工程中，如图所示：
 
@@ -40,7 +40,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 
 注意：如果cocos是2.x版本的还需要将LuaBasicConversions.cpp添加进去
 
-![](http://upload-images.jianshu.io/upload_images/1483670-71df6dea695206b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](http://upload-images.jianshu.io/upload_images/8667151-10b60015448938a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 找到ios文件夹下的`AppController`文件，添加初始化代码：
 
@@ -53,9 +53,13 @@ UMCCCommon::init(UMENG_APPKEY, "app store");
 其中`init`第一个参数为友盟Appkey，第二个参数为渠道
 
 
+```
 #include "lua_binding.h"
 #include "lua_push_binding.h"
 #include "lua_share_binding.h"
+```
+在AppDelegate.cpp中引用如上头文件
+
 在AppDelegate.cpp中的AppDelegate::applicationDidFinishLaunching函数中添加lua注册接口，如下所示：
 
     // set default FPS
@@ -78,14 +82,18 @@ UMCCCommon::init(UMENG_APPKEY, "app store");
     stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
 
 将需要的MobClickForLua.lua、umPushForLua.lua、umSocialForLua.lua文件放到你自己的lua路径中。
+
 （其中需要那部分功能可以只添加相应的文件，如统计：MobClickForLua.lua,push:umPushForLua.lua,share:umSocialForLua.lua,接口注册是也是如此）
 
 # 统计
 ## Android
 1.1android-studio集成方式：
+
 因为游戏统计组件是依赖于common组件的，所以需要将umeng-analytics-7.3.2.jar
 umeng-common-1.3.2.jar以及cocos的统计jar包导入到libs中，
+
 在Cocos2dx的主Activity中添加初始化代码：
+
 ```
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,6 +227,7 @@ id， ts， du是保留字段，不能作为eventId及key的名称。
   umeng::MobClickCpp::setUserLevel(9);
   MobClickForLua.setUserLevel(9);
 ```
+
 ```
 // 充值.
   void umeng::MobClickCpp::pay(double cash, int source, double coin);
@@ -229,18 +238,21 @@ id， ts， du是保留字段，不能作为eventId及key的名称。
   umeng::MobClickCpp::pay(10, 2, "magic_bottle", 2, 500);
   MobClickForLua.pay(10, 2, "magic_bottle", 2, 500);
 ```
+
 ```
 // 购买道具.
   void umeng::MobClickCpp::buy(const char *item, int amount, double price);
   umeng::MobClickCpp::buy("helmet", 1, 1000);
   MobClickForLua.buy("helmet", 1, 1000);
 ```
+
 ```
 // 消耗道具.
   void umeng::MobClickCpp::use(const char *item, int amount, double price);
   umeng::MobClickCpp::use("magic_bottle", 2, 50);
   MobClickForLua.use("magic_bottle", 2, 50)
 ```
+
 ```
 // 奖励金币.
   void umeng::MobClickCpp::bonus(double coin, int source);
@@ -251,6 +263,7 @@ id， ts， du是保留字段，不能作为eventId及key的名称。
   umeng::MobClickCpp::bonus("daoju",5,10.0,3);
   MobClickForLua.bonus("daoju",5,10.0,3);
 ```
+
 ```
 // 进入关卡.
   void umeng::MobClickCpp::startLevel(const char *level);
@@ -262,12 +275,14 @@ id， ts， du是保留字段，不能作为eventId及key的名称。
   void umeng::MobClickCpp::failLevel(const char *level);
   MobClickForLua.failLevel("level")
 ```
+
 ```
 // 订单充值.
   void exchange(const char *orderId, double currencyAmount, const char *currencyType,double virtualAmount,int channel)
   umeng::MobClickCpp::exchange("test_order",648.0,"CNY",6480,1);
   MobClickForLua.exchange("test_order",648.0,"CNY",6480,1)
 ```
+
 ```
 track事件
 自定义track事件
@@ -275,6 +290,7 @@ track事件
   local lucky= {john="chips" ,jane ="lemonade",jolene="egg salad" }
   MobClickForLua.track("test_1",lucky)
 ```
+
 ```
 超级属性
 对Dplus的事件，可以设置持久化的超级属性，如果用户具有某些典型特征（例如账号信息），或者需要按照某些特征（例如广告来源）分析用户的行为，那么可通过以下方法为用户标记超级属性：
