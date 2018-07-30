@@ -45,7 +45,6 @@ LOCAL_SRC_FILES := hellolua/main.cpp \
                     ../../../Classes/AppDelegate.cpp \
                     ../../../Classes/analytics/lua_binding.cpp \
                     ../../../Classes/analytics/MobClickCpp.cpp \
-                    ../../../Classes/analytics/DplusMobClickCpp.cpp \
                     ../../../Classes/push/CCUMPushSDK.cpp \
                     ../../../Classes/push/lua_push_binding.cpp \
                     ../../../Classes/share/lua_share_binding.cpp \

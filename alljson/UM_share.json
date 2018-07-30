@@ -1,0 +1,27 @@
+{
+    "name": "sharecocoslua",
+    "description": "社会化分享Cocos2dx-lua版本桥接文件，平台库请点选Android或iOS下载",
+    "chooseDescription":"",
+    "title": "Social SDK 5.0.0测试版",
+     "platform_version": "5.0.0", 
+    "docslink": "http://dev.umeng.com/sdk_integate/三方框架组件化/cocos2dx-lua组件化文档#4",
+    "notice": "社会化分享Cocos2dx-lua版本桥接文件，平台库请点选Android或iOS下载",
+    "show": 1,
+    "required": 0,
+    "display_platform": "Cocos2dx lua",
+    "packages": [
+          {
+            "required": 1,
+            "docslink": "",
+            "key": "cocosluashare",
+            "description": "",
+            "title": "",
+            "destination": "",
+            "files": [
+                "Cocos2dx_lua/share/share_cocos2dxlua_5.0.0/share_cc/",
+                "Cocos2dx_lua/share/share_cocos2dxlua_5.0.0/share_java/",
+                "Cocos2dx_lua/share/share_cocos2dxlua_5.0.0/lua/"
+            ]
+        }
+       ]
+}

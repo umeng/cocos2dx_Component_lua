@@ -1,0 +1,26 @@
+{
+    "name": "commoncocoslua",
+    "title": "",
+    "description": "cocosc common",
+    "docslink": "http://dev.umeng.com/sdk_integate/android_sdk/android_common_guide",
+    "show": 0,
+    "platform_version": "5.0.0", 
+    "title": "Common SDK 5.0.0测试版",
+    "required": 1,
+    "display_platform": "Cocos2dx lua",
+    "packages": [
+        {
+            "required": 1,
+            "docslink": "",
+            "key": "cocosluacommon",
+            "description": "",
+            "title": "",
+            "destination": "",
+            "files": [
+                "Cocos2dx_lua/common/common_cocos2dxlua_5.0.0/common_cc/",
+                "Cocos2dx_lua/common/common_cocos2dxlua_5.0.0/common_java/",
+              
+            ]
+        }
+    ]
+}

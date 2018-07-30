@@ -266,40 +266,31 @@ function MobClickForLua.setLatency(latency)
     umeng_setLatency(latency)
 end
 
-function MobClickForLua.track(eventName,...)
-    -- body
-    umeng_dplus_track(eventName,...)
-end
-
 function MobClickForLua.registerSuperProperty(property)
     -- body
-    umeng_dplus_registerSuperProperty(property)
+    umeng_registerSuperProperty(property)
 end
 
 function MobClickForLua.unregisterSuperProperty(propertyName)
     -- body
-    umeng_dplus_unregisterSuperProperty(propertyName)
+    umeng_unregisterSuperProperty(propertyName)
 end
 
-function MobClickForLua.getSuperProperty(propertyName)
-    -- body
-    return umeng_dplus_getSuperProperty(propertyName)
-end
 
 function MobClickForLua.getSuperProperties()
     -- body
-    return umeng_dplus_getSuperProperties()
+    return umeng_getSuperProperties()
 end
 
 function MobClickForLua.clearSuperProperties()
     -- body
-    umeng_dplus_clearSuperProperties()
+    umeng_clearSuperProperties()
 end
 
 
 function MobClickForLua.setFirstLaunchEvent(eventIdList)
     -- body
-    umeng_dplus_setFirstLaunchEvent(eventIdList)
+    umeng_setFirstLaunchEvent(eventIdList)
 end
 
 return cc.exports.MobClickForLua

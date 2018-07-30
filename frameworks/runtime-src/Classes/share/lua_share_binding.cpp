@@ -207,7 +207,8 @@ int lua_umeng_share_openShare(lua_State* L)
         if(!luaval_to_std_string(L, 7, &directFun, "umeng_openShare")){
             return UMENG_FAILED;
         }
-       umeng::CCUMSocialSDK::setBoardDismissCallback(boarddismiss_selector(boardCallBack)); umeng::CCUMSocialSDK::openShare(&platforms,text.c_str(),title.c_str(),url.c_str(),image.c_str(),share_selector(directCallback));
+       umeng::CCUMSocialSDK::setBoardDismissCallback(boarddismiss_selector(boardCallBack));
+        umeng::CCUMSocialSDK::openShare(&platforms,text.c_str(),title.c_str(),url.c_str(),image.c_str(),share_selector(directCallback));
         return UMENG_SUCCESS;
     }
     return UMENG_FAILED;

@@ -59,18 +59,12 @@ local function define(sender)
 
     mobclick.event("__finish_payment",lucky,10)
 end
-local function track(sender)
-    -- body
-    mobclick.track("test")
-    local lucky= {john="chips" ,jane ="lemonade",jolene="egg salad" }
-    mobclick.track("test_1",lucky)
-end
+
 local function SuperProperty(sender)
     -- body
     local lucky= {john="chips" ,jane ="lemonade",jolene="egg salad" }
     mobclick.registerSuperProperty(lucky)
     mobclick.unregisterSuperProperty("john")
-    print(mobclick.getSuperProperty("jane"))
     print(mobclick.getSuperProperties())
     mobclick.clearSuperProperties()
     local first = {"Lua", "Tutorial"}
@@ -104,7 +98,6 @@ function anascene.create()
     local  item12 = cc.MenuItemFont:create("自定义事件"):setPosition(cc.p(800,210))
     item12:registerScriptTapHandler(define)
     local  item13 = cc.MenuItemFont:create("track"):setPosition(cc.p(800,140))
-    item13:registerScriptTapHandler(track)
     local  item14 = cc.MenuItemFont:create("超级属性"):setPosition(cc.p(800,70))
     item14:registerScriptTapHandler(SuperProperty)
     local  item15 = cc.MenuItemFont:create("返回"):setPosition(cc.p(cc.Director:getInstance():getWinSize().width-100,100))

@@ -52,7 +52,6 @@
 		521A8E7119F0C3D200D177D7 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6F19F0C3D200D177D7 /* Default-736h@3x.png */; };
 		9D21BD471F710139001FAE1E /* UMCCCommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9D21BD451F710139001FAE1E /* UMCCCommon.mm */; };
 		9D21BD481F710139001FAE1E /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21BD461F710139001FAE1E /* UMCommon.framework */; };
-		9D21BD571F710169001FAE1E /* DplusMobClickCpp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9D21BD4F1F710169001FAE1E /* DplusMobClickCpp.mm */; };
 		9D21BD591F710169001FAE1E /* MobClickCpp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9D21BD531F710169001FAE1E /* MobClickCpp.mm */; };
 		9D21BD5A1F710169001FAE1E /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21BD541F710169001FAE1E /* UMAnalytics.framework */; };
 		9D21BDE01F710AF1001FAE1E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21BDDF1F710AF1001FAE1E /* CoreTelephony.framework */; };
@@ -93,6 +92,9 @@
 		9D3A0F291F7A4E0900926392 /* libSocialTwitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3A0EC91F75024200926392 /* libSocialTwitter.a */; };
 		9D3A0F2A1F7A4E0B00926392 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3A0EC61F75024100926392 /* TwitterCore.framework */; };
 		9D3A0F2B1F7A4E0E00926392 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3A0EC81F75024100926392 /* TwitterKit.framework */; };
+		9D8D34F92015EF5B00FF09CA /* TencentOpenAPI.framework in Resources */ = {isa = PBXBuildFile; fileRef = 9D8D34F62015EF5A00FF09CA /* TencentOpenAPI.framework */; };
+		9DCFD63B210D6E43009032C6 /* UMCommonLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DCFD637210D6E43009032C6 /* UMCommonLog.framework */; };
+		9DCFD63C210D6E44009032C6 /* UMCommonLog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9DCFD63A210D6E43009032C6 /* UMCommonLog.bundle */; };
 		9FA3AE4E1BE9BCC900FC9645 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA3AE4D1BE9BCC900FC9645 /* CFNetwork.framework */; };
 		9FF504841A5E87B100AFDA55 /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FF504811A5E87B100AFDA55 /* ConsoleWindow.xib */; };
 		9FF504851A5E87B100AFDA55 /* ConsoleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FF504831A5E87B100AFDA55 /* ConsoleWindowController.m */; };
@@ -268,8 +270,6 @@
 		9D21BD441F710139001FAE1E /* UMCCCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMCCCommon.h; path = ../Classes/Common/UMCCCommon.h; sourceTree = "<group>"; };
 		9D21BD451F710139001FAE1E /* UMCCCommon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UMCCCommon.mm; path = ../Classes/Common/UMCCCommon.mm; sourceTree = "<group>"; };
 		9D21BD461F710139001FAE1E /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = ../Classes/Common/UMCommon.framework; sourceTree = "<group>"; };
-		9D21BD4E1F710169001FAE1E /* DplusMobClickCpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DplusMobClickCpp.h; path = ../Classes/analytics/DplusMobClickCpp.h; sourceTree = "<group>"; };
-		9D21BD4F1F710169001FAE1E /* DplusMobClickCpp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DplusMobClickCpp.mm; path = ../Classes/analytics/DplusMobClickCpp.mm; sourceTree = "<group>"; };
 		9D21BD521F710169001FAE1E /* MobClickCpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MobClickCpp.h; path = ../Classes/analytics/MobClickCpp.h; sourceTree = "<group>"; };
 		9D21BD531F710169001FAE1E /* MobClickCpp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MobClickCpp.mm; path = ../Classes/analytics/MobClickCpp.mm; sourceTree = "<group>"; };
 		9D21BD541F710169001FAE1E /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = ../Classes/analytics/UMAnalytics.framework; sourceTree = "<group>"; };
@@ -342,6 +342,9 @@
 		9D3A0F0F1F7A3F6B00926392 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		9D3A0F111F7A3F7800926392 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		9D3A0F261F7A4D3000926392 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = ../Classes/share/umeng_ios_social_sdk/UMSocial_Sdk_Extra_Frameworks/Twitter/TwitterKit.framework/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		9D8D34F62015EF5A00FF09CA /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = file; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		9DCFD637210D6E43009032C6 /* UMCommonLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommonLog.framework; path = ../Classes/Common/UMCommonLog.framework; sourceTree = "<group>"; };
+		9DCFD63A210D6E43009032C6 /* UMCommonLog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = UMCommonLog.bundle; path = ../Classes/Common/UMCommonLog.bundle; sourceTree = "<group>"; };
 		9FA3AE4D1BE9BCC900FC9645 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		9FF504781A5E86D600AFDA55 /* libsimulator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libsimulator.xcodeproj; path = "../../cocos2d-x/tools/simulator/libsimulator/proj.ios_mac/libsimulator.xcodeproj"; sourceTree = "<group>"; };
 		9FF504811A5E87B100AFDA55 /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleWindow.xib; sourceTree = "<group>"; };
@@ -426,6 +429,7 @@
 				5200BECA1A53D9A500AC45E4 /* Security.framework in Frameworks */,
 				15427CD5198F222200DC375D /* libluacocos2d iOS.a in Frameworks */,
 				9D21BD481F710139001FAE1E /* UMCommon.framework in Frameworks */,
+				9DCFD63B210D6E43009032C6 /* UMCommonLog.framework in Frameworks */,
 				15427CD3198F221400DC375D /* libcocos2d iOS.a in Frameworks */,
 				9D3A0F171F7A420800926392 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				3EEEDB61197107C0006A9FF8 /* MediaPlayer.framework in Frameworks */,
@@ -522,8 +526,11 @@
 		9D21BD431F710125001FAE1E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9DCFD63A210D6E43009032C6 /* UMCommonLog.bundle */,
+				9DCFD637210D6E43009032C6 /* UMCommonLog.framework */,
 				9D21BD441F710139001FAE1E /* UMCCCommon.h */,
 				9D21BD451F710139001FAE1E /* UMCCCommon.mm */,
+				9D8D34F62015EF5A00FF09CA /* TencentOpenAPI.framework */,
 				9D21BD461F710139001FAE1E /* UMCommon.framework */,
 			);
 			name = Common;
@@ -532,8 +539,6 @@
 		9D21BD491F710151001FAE1E /* analytics */ = {
 			isa = PBXGroup;
 			children = (
-				9D21BD4E1F710169001FAE1E /* DplusMobClickCpp.h */,
-				9D21BD4F1F710169001FAE1E /* DplusMobClickCpp.mm */,
 				9D21BDEF1F723FA6001FAE1E /* lua_binding.cpp */,
 				9D21BDF01F723FA6001FAE1E /* lua_binding.h */,
 				9D21BD521F710169001FAE1E /* MobClickCpp.h */,
@@ -1020,11 +1025,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				15A8A4491834C64F00142BE0 /* Icon-114.png in Resources */,
+				9D8D34F92015EF5B00FF09CA /* TencentOpenAPI.framework in Resources */,
 				5023811D17EBBCAC00990C9B /* Icon-120.png in Resources */,
 				9D3A0F271F7A4D3100926392 /* TwitterKitResources.bundle in Resources */,
 				5091733B17ECE17A00D62437 /* Icon-100.png in Resources */,
 				5023811B17EBBCAC00990C9B /* Default@2x.png in Resources */,
 				5091733617ECE17A00D62437 /* Icon-29.png in Resources */,
+				9DCFD63C210D6E44009032C6 /* UMCommonLog.bundle in Resources */,
 				5023811917EBBCAC00990C9B /* Default-568h@2x.png in Resources */,
 				5091733917ECE17A00D62437 /* Icon-58.png in Resources */,
 				5023811F17EBBCAC00990C9B /* Icon-152.png in Resources */,
@@ -1090,7 +1097,6 @@
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				9D21BD591F710169001FAE1E /* MobClickCpp.mm in Sources */,
-				9D21BD571F710169001FAE1E /* DplusMobClickCpp.mm in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				9D21BD471F710139001FAE1E /* UMCCCommon.mm in Sources */,
 				9D21BDF11F723FA6001FAE1E /* lua_binding.cpp in Sources */,

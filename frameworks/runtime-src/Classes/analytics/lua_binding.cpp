@@ -10,7 +10,6 @@
 #include "lua_binding.h"
 #include "MobClickCpp.h"
 #include "LuaBasicConversions.h"
-#include "DplusMobClickCpp.h"
 #include "tolua++.h"
 extern "C" {
 #include "lua.h"
@@ -472,35 +471,6 @@ int lua_umeng_mobclickcpp_setLatency(lua_State* L)
     }
     return UMENG_FAILED;
 }
-int lua_umeng_dplus_track(lua_State* L)
-{
-    int paranum = 0;
-    paranum = lua_gettop(L);
-    if (paranum == 1)
-    {
-        const char* eventid;
-        std::string eventid_tmp;
-        if(luaval_to_std_string(L, 1, &eventid_tmp, "umeng_dplus_track")){
-            eventid = eventid_tmp.c_str();
-            umeng::DplusMobClickCpp::track(eventid);
-            return UMENG_SUCCEED;
-        }
-    }else if(paranum == 2){
-        const char* eventid;
-        std::string eventid_tmp;
-        bool id_ok = luaval_to_std_string(L, 1, &eventid_tmp, "umeng_dplus_track");
-    
-        std::map<std::string,std::string> dict;
-        id_ok &=  umeng_luaval_to_stdmap(L, 2, &dict, "umeng_dplus_track");
-        if(id_ok){
-            eventid = eventid_tmp.c_str();
-            umeng::DplusMobClickCpp::track(eventid,&dict);
-            return UMENG_SUCCEED;
-        }
-    }
-    return UMENG_FAILED;
-}
-
 
 int lua_umeng_dplus_registerSuperProperty(lua_State* L)
 {
@@ -512,7 +482,7 @@ int lua_umeng_dplus_registerSuperProperty(lua_State* L)
         std::map<std::string,std::string> dict;
         bool id_ok =  umeng_luaval_to_stdmap(L, 1, &dict, "umeng_dplus_registerSuperProperty");
         if(id_ok){
-            umeng::DplusMobClickCpp::registerSuperProperty(&dict);
+            umeng::MobClickCpp::registerSuperProperty(&dict);
             return UMENG_SUCCEED;
         }
     }
@@ -530,34 +500,17 @@ int lua_umeng_dplus_unregisterSuperProperty(lua_State* L)
         std::string eventid_tmp;
         if(luaval_to_std_string(L, 1, &eventid_tmp, "umeng_dplus_unregisterSuperProperty")){
             eventid = eventid_tmp.c_str();
-            umeng::DplusMobClickCpp::unregisterSuperProperty(eventid);
+            umeng::MobClickCpp::unregisterSuperProperty(eventid);
             return UMENG_SUCCEED;
         }
     }
     return UMENG_FAILED;
 }
-int lua_umeng_dplus_getSuperProperty(lua_State* L)
-{
-    int paranum = 0;
-    paranum = lua_gettop(L);
-    if (paranum == 1)
-    {
-        const char* eventid;
-        std::string eventid_tmp;
-        if(luaval_to_std_string(L, 1, &eventid_tmp, "umeng_dplus_getSuperProperty")){
-            eventid = eventid_tmp.c_str();
-            std::string result = umeng::DplusMobClickCpp::getSuperProperty(eventid);
-            tolua_pushcppstring(L,result);
-            return 1;
-        }
-    }
-    return 0;
-}
 
 int lua_umeng_dplus_getSuperProperties(lua_State* L)
 {
     
-    std::string result = umeng::DplusMobClickCpp::getSuperProperties();
+    std::string result = umeng::MobClickCpp::getSuperProperties();
     tolua_pushcppstring(L,result);
     return 1;
 }
@@ -565,7 +518,7 @@ int lua_umeng_dplus_getSuperProperties(lua_State* L)
 int lua_umeng_dplus_clearSuperProperties(lua_State* L)
 {
     
-    umeng::DplusMobClickCpp::clearSuperProperties();
+    umeng::MobClickCpp::clearSuperProperties();
     return UMENG_SUCCEED;
 }
 
@@ -577,7 +530,7 @@ int lua_umeng_dplus_setFirstLaunchEvent(lua_State* L)
     {
         std::vector<std::string>tmp;
         if(luaval_to_std_vector_string(L, 1, &tmp, "umeng_dplus_setFirstLaunchEvent")){
-            umeng::DplusMobClickCpp::setFirstLaunchEvent(&tmp);
+            umeng::MobClickCpp::setFirstLaunchEvent(&tmp);
             return UMENG_SUCCEED;
         }
     }
@@ -606,13 +559,11 @@ int lua_register_UmengClick(lua_State* L)
     lua_register(L,"umeng_exchange", lua_umeng_mobclickcpp_exchange);
     lua_register(L,"umeng_setLatency", lua_umeng_mobclickcpp_setLatency);
 
-    lua_register(L,"umeng_dplus_track", lua_umeng_dplus_track);
-    lua_register(L,"umeng_dplus_registerSuperProperty", lua_umeng_dplus_registerSuperProperty);
-    lua_register(L,"umeng_dplus_unregisterSuperProperty", lua_umeng_dplus_unregisterSuperProperty);
-    lua_register(L,"umeng_dplus_getSuperProperty", lua_umeng_dplus_getSuperProperty);
-    lua_register(L,"umeng_dplus_getSuperProperties", lua_umeng_dplus_getSuperProperties);
-    lua_register(L,"umeng_dplus_clearSuperProperties", lua_umeng_dplus_clearSuperProperties);
-    lua_register(L,"umeng_dplus_setFirstLaunchEvent", lua_umeng_dplus_setFirstLaunchEvent);
+    lua_register(L,"umeng_registerSuperProperty", lua_umeng_dplus_registerSuperProperty);
+    lua_register(L,"umeng_unregisterSuperProperty", lua_umeng_dplus_unregisterSuperProperty);
+    lua_register(L,"umeng_getSuperProperties", lua_umeng_dplus_getSuperProperties);
+    lua_register(L,"umeng_clearSuperProperties", lua_umeng_dplus_clearSuperProperties);
+    lua_register(L,"umeng_setFirstLaunchEvent", lua_umeng_dplus_setFirstLaunchEvent);
 
     return 1;
 }

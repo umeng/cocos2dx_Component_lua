@@ -170,7 +170,6 @@ void CCUMSocialSDK:: setBoardDismissCallback(BoardDismissEventHandler callback){
 	JniMethodInfo mi;
 	bool isHave = getMethod(mi, "setDismissCallback", "()V");
 	if (isHave) {
-
 			mi.env->CallStaticVoidMethod(mi.classID, mi.methodID);
 			releaseMethod(mi);
 		}

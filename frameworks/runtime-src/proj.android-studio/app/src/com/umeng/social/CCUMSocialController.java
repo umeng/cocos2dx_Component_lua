@@ -255,6 +255,7 @@ public class CCUMSocialController {
 
 			@Override
 			public void onDismiss() {
+
 				OnBoardDismiss();
 
 			}

@@ -221,13 +221,17 @@ id， ts， du是保留字段，不能作为eventId及key的名称。
     这样才能保证每个页面统计的正确。
 
 游戏方法详解
+
 ```
 // 设置玩家等级.
   void umeng::MobClickCpp::setUserLevel(int level);
   umeng::MobClickCpp::setUserLevel(9);
   MobClickForLua.setUserLevel(9);
 ```
-
+// 注意：
+  如果在游戏中不调用任何游戏事件的接口，如：关卡接口，道具购买等接口，
+  等级数据在后端是不会显示的，需要开发者自己随意调用一个游戏接口。
+  比如：pay,buy,use,bonus等接口。
 ```
 // 充值.
   void umeng::MobClickCpp::pay(double cash, int source, double coin);
