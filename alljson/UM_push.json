@@ -1,27 +1,57 @@
 {
-    "name": "pushcocoslua",
-    "description": "推送Cocos2dx-lua版本桥接文件，平台库请点选Android或iOS下载",
-    "chooseDescription":"",
-    "title": "Push SDK 5.0.0测试版",
-     "platform_version": "5.0.0", 
-    "docslink": "http://dev.umeng.com/sdk_integate/三方框架组件化/cocos2dx-lua组件化文档#3",
-    "notice": "推送Cocos2dx-lua版本桥接文件，平台库请点选Android或iOS下载",
-    "show": 1,
-    "required": 0,
-    "display_platform": "Cocos2dx lua",
+    "docslink": "https://developer.umeng.com/docs/66632/detail/67584", 
+    "notice": "推送Cocos2dx-lua版本桥接文件，平台库请点选Android或iOS下载", 
+    "description": "推送Cocos2dx-lua版本桥接文件，平台库请点选Android或iOS下载", 
+    "index": 1, 
+    "required": 0, 
+    "chooseDescription": "", 
+    "name": "pushcocoslua", 
+    "platform_version": "5.0.0", 
+    "display_platform": "Cocos2dx lua", 
+    "show": 1, 
+    "title": "消息推送 SDK", 
+    "defaultSelect": [
+        "androidpush_cocoslua"
+    ], 
     "packages": [
-          {
-            "required": 1,
-            "docslink": "",
-            "key": "cocosluapush",
-            "description": "",
-            "title": "",
-            "destination": "",
+        {
             "files": [
-                "Cocos2dx_lua/push/push_cocos2dxlua_5.0.0/push_cc/",
-                "Cocos2dx_lua/push/push_cocos2dxlua_5.0.0/push_java/",
+                "Cocos2dx_lua/push/push_cocos2dxlua_5.0.0/push_cc/", 
+                "Cocos2dx_lua/push/push_cocos2dxlua_5.0.0/push_java/", 
                 "Cocos2dx_lua/push/push_cocos2dxlua_5.0.0/lua/"
-            ]
+            ], 
+            "docslink": "", 
+            "required": 1, 
+            "description": "", 
+            "title": "", 
+            "destination": "", 
+            "key": "cocosluapush"
+        }, 
+        {
+            "files": [
+                "Android/push/push_android_4.2.0/push/"
+            ], 
+            "style": " single", 
+            "required": 1, 
+            "description": "SDK核心库文件，必须添加到工程中", 
+            "title": "PushSDK标准版", 
+            "destination": "", 
+            "key": "androidpush_cocoslua"
+        }, 
+        {
+            "files": [
+                "iOS/push/push_ios_3.2.2/UMPush.framework"
+            ], 
+            "required": 1, 
+            "description": "SDK核心库文件，必须添加到工程中", 
+            "title": "PushSDK核心库", 
+            "destination": "", 
+            "key": "iospush_cocoslua"
         }
-       ]
+    ], 
+    "log": {
+        "date": "2017-12-03", 
+        "content": "1.整体进行了重构，使其适配了组件化版本", 
+        "title": "v5.0.0"
+    }
 }
