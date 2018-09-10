@@ -6,7 +6,7 @@
     "required": 0, 
     "chooseDescription": "", 
     "name": "pushcocoslua", 
-    "platform_version": "5.0.0", 
+    "platform_version": "6.0.0", 
     "display_platform": "Cocos2dx lua", 
     "show": 1, 
     "title": "消息推送 SDK", 
@@ -16,9 +16,9 @@
     "packages": [
         {
             "files": [
-                "Cocos2dx_lua/push/push_cocos2dxlua_5.0.0/push_cc/", 
-                "Cocos2dx_lua/push/push_cocos2dxlua_5.0.0/push_java/", 
-                "Cocos2dx_lua/push/push_cocos2dxlua_5.0.0/lua/"
+                "Cocos2dx_lua/push/push_cocos2dxlua_6.0.0/push_cc/", 
+                "Cocos2dx_lua/push/push_cocos2dxlua_6.0.0/push_java/", 
+                "Cocos2dx_lua/push/push_cocos2dxlua_6.0.0/lua/"
             ], 
             "docslink": "", 
             "required": 1, 
@@ -52,6 +52,6 @@
     "log": {
         "date": "2017-12-03", 
         "content": "1.整体进行了重构，使其适配了组件化版本", 
-        "title": "v5.0.0"
+        "title": "v6.0.0"
     }
 }
